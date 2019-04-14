@@ -14,7 +14,7 @@ class RegularCard extends Component {
 
 class OpenCard extends Component {
 	render() {
-		const { card, id, className, drag } = this.props;
+		const { card, id, className, drag, doubleClick } = this.props;
 		return (
 			<div
 				key={card.id}
@@ -22,6 +22,7 @@ class OpenCard extends Component {
 				className={"card " + card.color + " " + className}
 				draggable="true"
 				onDragStart={drag}
+				onDoubleClick={doubleClick}
 			>
 				{card.unicode}
 			</div>
@@ -81,7 +82,7 @@ class Stack extends Component {
 		return <FaceDownCard className=" clickable" onClick={drawer} />;
 	}
 
-	renderOpenCard(drag) {
+	renderOpenCard(drag, doubleClick) {
 		if (this.state.stack.openCards.length === 0) {
 			return <RegularCard card={EmptyCard} className="transparent" />;
 		}
@@ -91,16 +92,17 @@ class Stack extends Component {
 				card={this.state.stack.openCards[topCardIndex]}
 				id="stack"
 				drag={drag}
+				doubleClick={doubleClick}
 			/>
 		);
 	}
 
 	render() {
-		const { drag } = this.props;
+		const { drag, doubleClick } = this.props;
 		return (
 			<div className="stack">
 				{this.renderFaceDownCard(this.openCard, this.refillStack)}
-				{this.renderOpenCard(drag)}
+				{this.renderOpenCard(drag, doubleClick)}
 			</div>
 		);
 	}
@@ -168,7 +170,7 @@ class WastePile extends Component {
 		};
 	}
 
-	renderCards(id, drag) {
+	renderCards(id, drag, doubleClick) {
 		const numberOfOpenCards = this.state.wastePile.openCards.length;
 		const faceDownCards = this.state.wastePile.faceDownCards.map(
 			(faceDownCard, index) => (
@@ -185,6 +187,7 @@ class WastePile extends Component {
 				card={openCard}
 				className="adjustable"
 				drag={drag}
+				doubleClick={doubleClick}
 			/>
 		));
 		const allCards = faceDownCards.concat(openCards);
@@ -201,10 +204,10 @@ class WastePile extends Component {
 	}
 
 	render() {
-		const { drag, allowDrop, drop, id } = this.props;
+		const { id, drag, allowDrop, drop, doubleClick } = this.props;
 		return (
 			<div id={id} className="waste-pile" onDragOver={allowDrop} onDrop={drop}>
-				{this.renderCards(id, drag)}
+				{this.renderCards(id, drag, doubleClick)}
 			</div>
 		);
 	}
@@ -217,7 +220,7 @@ class WastePiles extends Component {
 	}
 
 	render() {
-		const { drag, allowDrop, drop } = this.props;
+		const { drag, allowDrop, drop, doubleClick } = this.props;
 		return (
 			<div className="waste-piles">
 				{this.wastePiles.map((wastePile, index) => (
@@ -228,6 +231,7 @@ class WastePiles extends Component {
 						drag={drag}
 						allowDrop={allowDrop}
 						drop={drop}
+						doubleClick={doubleClick}
 					/>
 				))}
 			</div>
@@ -242,6 +246,7 @@ class GameView extends Component {
 		this.drag = this.drag.bind(this);
 		this.drop = this.drop.bind(this);
 		this.allowDrop = this.allowDrop.bind(this);
+		this.placeCard = this.placeCard.bind(this);
 	}
 
 	allowDrop(event) {
@@ -259,7 +264,24 @@ class GameView extends Component {
 		this.setState({ game: this.state.game });
 	}
 
-	getSource(sourceDetails) {
+	moveCardsToDestination(source, destination, numberOfCards) {
+		const cards = source.drawCards(numberOfCards);
+		const isAdded = destination.addCards(cards);
+		if (isAdded) {
+			source.removeCards(cards.length);
+		}
+	}
+
+	placeCard(event) {
+		const source = this.getOrigin(event.target.id);
+		const numberOfCards = this.getNumberOfCardsToDraw(event.target.id);
+		this.state.game.foundations.some(foundation =>
+			this.moveCardsToDestination(source, foundation, numberOfCards)
+		);
+		this.setState({ game: this.state.game });
+	}
+
+	getOrigin(sourceDetails) {
 		if (sourceDetails === "stack") {
 			return this.state.game.stack;
 		}
@@ -275,25 +297,24 @@ class GameView extends Component {
 	}
 
 	moveCards(sourceDetails, destinationDetails) {
-		const source = this.getSource(sourceDetails);
-		const destination = this.getSource(destinationDetails);
+		const source = this.getOrigin(sourceDetails);
+		const destination = this.getOrigin(destinationDetails);
+		const numberOfCards = this.getNumberOfCardsToDraw(sourceDetails);
 		if (!destination) {
 			return;
 		}
-		const numberOfCards = this.getNumberOfCardsToDraw(sourceDetails);
-		let isAdded = false;
-		const cards = source.drawCards(numberOfCards);
-		isAdded = destination.addCards(cards);
-		if (isAdded) {
-			source.removeCards(cards.length);
-		}
+		this.moveCardsToDestination(source, destination, numberOfCards);
 	}
 
 	render() {
 		return (
 			<main>
 				<nav>
-					<Stack stack={this.state.game.stack} drag={this.drag} />
+					<Stack
+						stack={this.state.game.stack}
+						drag={this.drag}
+						doubleClick={this.placeCard}
+					/>
 					<Foundations
 						foundations={this.state.game.foundations}
 						drag={this.drag}
@@ -307,6 +328,7 @@ class GameView extends Component {
 						drag={this.drag}
 						allowDrop={this.allowDrop}
 						drop={this.drop}
+						doubleClick={this.placeCard}
 					/>
 				</section>
 			</main>
