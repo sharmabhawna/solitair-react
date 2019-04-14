@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import lodash from "lodash";
+import { Cards } from "./data/cards";
+import Card from "./model/card";
+import Game from "./model/game";
+import { GameView } from "./GameView";
+
+const deck = lodash.shuffle(Cards).map(card => new Card(card));
+
+const game = new Game(deck);
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return <GameView game={game} />;
+	}
 }
 
 export default App;

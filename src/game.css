@@ -1,0 +1,118 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	background-color: darkcyan;
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+}
+
+main {
+	width: 100%;
+	height: 100%;
+}
+
+nav {
+	width: 100%;
+	height: 25%;
+	display: flex;
+}
+
+section {
+	width: 100%;
+	height: 75%;
+	display: flex;
+	align-items: center;
+}
+
+.stack {
+	width: 20%;
+	height: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.foundation {
+	width: 20%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.foundations {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.waste-pile {
+	width: 15%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 3% 0px;
+}
+
+.waste-piles {
+	width: 70%;
+	height: 90%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.default-card {
+	width: 98px;
+	height: 130px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.card {
+	width: 98px;
+	height: 130px;
+	text-align: center;
+	line-height: 0.9;
+	font-size: 130px;
+	background: white;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.adjustable {
+	margin: -30%;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.smaller-font {
+	text-align: center;
+	line-height: 1.5;
+	font-size: 90px;
+}
+
+.transparent {
+	background: transparent;
+}
+
+.black {
+	color: black;
+}
+
+.red {
+	color: red;
+}
+
+.blue {
+	color: rgb(6, 6, 87);
+}
