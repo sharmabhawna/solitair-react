@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/solitair-react/static/js/runtime~main.c8b1fa90.js"
   },
   {
-    "revision": "e6366238fc83b8fa15e3",
-    "url": "/solitair-react/static/js/main.eec4caaa.chunk.js"
+    "revision": "cd2c4cec9a214302aa32",
+    "url": "/solitair-react/static/js/main.31245ba8.chunk.js"
   },
   {
     "revision": "cb0e8d301fc236d7b6cd",
     "url": "/solitair-react/static/js/2.f0b0db37.chunk.js"
   },
   {
-    "revision": "e6366238fc83b8fa15e3",
+    "revision": "cd2c4cec9a214302aa32",
     "url": "/solitair-react/static/css/main.de0e19b5.chunk.css"
   },
   {
-    "revision": "470d4e1eb0e302a148bdf52033a9615b",
+    "revision": "aa24bd9823e53fc2c3da057e5ed1a4ba",
     "url": "/solitair-react/index.html"
   }
 ];
