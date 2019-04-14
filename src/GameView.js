@@ -264,20 +264,27 @@ class GameView extends Component {
 		this.setState({ game: this.state.game });
 	}
 
+	isWon() {
+		return this.state.game.foundations.every(
+			foundation => foundation.cards.length === 13
+		);
+	}
+
 	moveCardsToDestination(source, destination, numberOfCards) {
 		const cards = source.drawCards(numberOfCards);
 		const isAdded = destination.addCards(cards);
 		if (isAdded) {
 			source.removeCards(cards.length);
 		}
+		return isAdded;
 	}
 
 	placeCard(event) {
 		const source = this.getOrigin(event.target.id);
 		const numberOfCards = this.getNumberOfCardsToDraw(event.target.id);
-		this.state.game.foundations.some(foundation =>
-			this.moveCardsToDestination(source, foundation, numberOfCards)
-		);
+		this.state.game.foundations.some(foundation => {
+			return this.moveCardsToDestination(source, foundation, numberOfCards);
+		});
 		this.setState({ game: this.state.game });
 	}
 
@@ -307,6 +314,9 @@ class GameView extends Component {
 	}
 
 	render() {
+		if (this.isWon()) {
+			console.log("game has been won");
+		}
 		return (
 			<main>
 				<nav>
