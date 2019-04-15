@@ -247,6 +247,21 @@ class GameView extends Component {
 		this.drop = this.drop.bind(this);
 		this.allowDrop = this.allowDrop.bind(this);
 		this.placeCard = this.placeCard.bind(this);
+		this.startTime = Date.now();
+	}
+
+	timeDifference(time1, time2) {
+		let difference = time2 - time1;
+
+		const hoursDifference = Math.floor(difference / 1000 / 60 / 60);
+		difference -= hoursDifference * 1000 * 60 * 60;
+
+		const minutesDifference = Math.floor(difference / 1000 / 60);
+		difference -= minutesDifference * 1000 * 60;
+
+		const secondsDifference = Math.floor(difference / 1000);
+
+		return `${hoursDifference} : ${minutesDifference} : ${secondsDifference}`;
 	}
 
 	allowDrop(event) {
@@ -313,9 +328,25 @@ class GameView extends Component {
 		this.moveCardsToDestination(source, destination, numberOfCards);
 	}
 
+	wonPopUp() {
+		const timeTaken = this.timeDifference(this.startTime, this.endTime);
+		return (
+			<main>
+				<div className="overlay">
+					<div className="message">
+						You won the game <br />
+						<br /> Total Time : {timeTaken}
+					</div>
+					<a href="/">Play Again</a>
+				</div>
+			</main>
+		);
+	}
+
 	render() {
 		if (this.isWon()) {
-			console.log("game has been won");
+			this.endTime = Date.now();
+			return this.wonPopUp();
 		}
 		return (
 			<main>
