@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/solitair-react/static/js/runtime~main.c8b1fa90.js"
   },
   {
-    "revision": "ed61792f048e7d26e5c0",
+    "revision": "14217e4c9733ab589a1a",
     "url": "/solitair-react/static/js/main.0217501b.chunk.js"
   },
   {
@@ -12,11 +12,11 @@ self.__precacheManifest = [
     "url": "/solitair-react/static/js/2.f0b0db37.chunk.js"
   },
   {
-    "revision": "ed61792f048e7d26e5c0",
-    "url": "/solitair-react/static/css/main.256cfd2d.chunk.css"
+    "revision": "14217e4c9733ab589a1a",
+    "url": "/solitair-react/static/css/main.703ed2db.chunk.css"
   },
   {
-    "revision": "b38302a8301935b34a691f0f9351aaef",
+    "revision": "99d326ad8a4a15b67c7eae505eacdb49",
     "url": "/solitair-react/index.html"
   }
 ];

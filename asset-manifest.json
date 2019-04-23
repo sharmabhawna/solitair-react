@@ -1,5 +1,5 @@
 {
-  "main.css": "/solitair-react/static/css/main.256cfd2d.chunk.css",
+  "main.css": "/solitair-react/static/css/main.703ed2db.chunk.css",
   "main.js": "/solitair-react/static/js/main.0217501b.chunk.js",
   "main.js.map": "/solitair-react/static/js/main.0217501b.chunk.js.map",
   "runtime~main.js": "/solitair-react/static/js/runtime~main.c8b1fa90.js",
@@ -7,7 +7,7 @@
   "static/js/2.f0b0db37.chunk.js": "/solitair-react/static/js/2.f0b0db37.chunk.js",
   "static/js/2.f0b0db37.chunk.js.map": "/solitair-react/static/js/2.f0b0db37.chunk.js.map",
   "index.html": "/solitair-react/index.html",
-  "precache-manifest.bc710f476bade51f94a03bf34c6376b9.js": "/solitair-react/precache-manifest.bc710f476bade51f94a03bf34c6376b9.js",
+  "precache-manifest.97a4db71bc3194ac6174e399920fb503.js": "/solitair-react/precache-manifest.97a4db71bc3194ac6174e399920fb503.js",
   "service-worker.js": "/solitair-react/service-worker.js",
-  "static/css/main.256cfd2d.chunk.css.map": "/solitair-react/static/css/main.256cfd2d.chunk.css.map"
+  "static/css/main.703ed2db.chunk.css.map": "/solitair-react/static/css/main.703ed2db.chunk.css.map"
 }
